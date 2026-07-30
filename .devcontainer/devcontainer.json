@@ -1,0 +1,28 @@
+{
+  "name": "astro-devcontainer",
+  "features": {
+    "ghcr.io/devcontainers/features/git:1": {}
+  },
+  "build": {
+    "dockerfile": "Dockerfile",
+    "context": ".."
+  },
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "dbaeumer.vscode-eslint",
+        "ms-vscode.vscode-typescript-next",
+        "astro-build.astro-vscode"
+      ],
+      "settings": {
+        "js/ts.tsdk.path": "node_modules/typescript/lib",
+        "eslint.validate": ["javascript",  "typescript"],
+        "editor.codeActionsOnSave": {
+          "source.fixAll.eslint": "explicit"
+        }
+      }
+    }
+  },
+  "forwardPorts": [4321],
+  "remoteUser": "node"
+}
