@@ -1,3 +1,0 @@
-- [ ] SetUp devcontainer
-- [ ] Install astro in devcontainer
-- [ ] Create a sandbox project 
