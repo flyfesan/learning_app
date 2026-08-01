@@ -1,10 +1,10 @@
-import { defineAstroPaperConfig } from "./src/types/config";
+import { createLingoMasterConfig } from "./src/types/config";
 
-export default defineAstroPaperConfig({
+export default createLingoMasterConfig({
   site: {
-    url: "https://astro-paper.pages.dev/",
-    title: "AstroPaper",
-    description: "A minimal, responsive and SEO-friendly Astro blog theme.",
+    url: "https://lingo-master.pages.dev/",
+    title: "LingoMaster",
+    description: "A minimal app that helps you learn languages",
     author: "Sat Naing",
     profile: "https://satna.ing",
     ogImage: "default-og.jpg",
@@ -22,10 +22,9 @@ export default defineAstroPaperConfig({
     dynamicOgImage: true,
     showBackButton: true,
     editPost: {
-      enabled: true,
-      url: "https://github.com/satnaing/astro-paper/edit/main/",
+      enabled: false,
     },
-    search: "pagefind",
+    search: false,
   },
   socials: [
     { name: "github",   url: "https://github.com/flyfesan" },
