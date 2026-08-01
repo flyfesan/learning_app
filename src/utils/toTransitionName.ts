@@ -11,7 +11,7 @@ export const toTransitionName = (str: string): string => {
   let result = base
     // encode non-ASCII chars (Chinese, Japanese, etc.)
     .replace(
-      /[^\x00-\x7F]/gu,
+      /[^\p{ASCII}]/gu,
       c => "u" + c.codePointAt(0)!.toString(16).padStart(6, "0")
     )
     // replace any remaining invalid chars (colons, slashes, etc.)

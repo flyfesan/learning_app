@@ -26,5 +26,9 @@ const { Content } = await render(about);
 >
   <Header />
 
+  <Main pageTitle={about.data.title} class="app-prose">
+    <Content />
+  </Main>
+
   <Footer />
 </Layout>
