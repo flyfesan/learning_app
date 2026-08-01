@@ -1,4 +1,4 @@
-import type { ResolvedAstroPaperConfig } from "@/types/config";
+import type { ResolvedLingoMasterConfig } from "@/types/config";
 import { getAssetPath } from "./withBase";
 
 const publicFiles = import.meta.glob("/public/*", { eager: false });
@@ -19,7 +19,7 @@ function existsInPublic(filename: string): boolean {
  * - When disabled, requires `public/{site.ogImage}` to exist.
  */
 export function resolveDefaultOgImagePath(
-  config: ResolvedAstroPaperConfig
+  config: ResolvedLingoMasterConfig
 ): string {
   const filename = config.site.ogImage;
   if (

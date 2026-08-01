@@ -40,6 +40,9 @@ export interface UIStrings {
     tagsTitle: string;
     tagsDesc: string;
 
+    translateTitle: string;
+    translateDesc: string;
+
     postsTitle: string;
     postsDesc: string;
 

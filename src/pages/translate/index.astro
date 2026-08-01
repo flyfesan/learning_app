@@ -1,0 +1,15 @@
+---
+import Footer from "@/components/Footer.astro";
+import Header from "@/components/Header.astro";
+import { useTranslations } from "@/i18n";
+import Layout from "@/layouts/Layout.astro";
+import config from "@/config";
+
+const { page  } = Astro.props;
+const t = useTranslations(Astro.currentLocale ?? config.site.lang);  
+---
+<Layout title={`${t.pages.translateTitle} | ${config.site.title}`}>
+  <Header />
+
+  <Footer />
+</Layout>

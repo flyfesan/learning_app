@@ -42,6 +42,9 @@ export default {
     tagsTitle: "Tags",
     tagsDesc: "All the tags used in posts.",
 
+    translateTitle: "Translate",
+    translateDesc: "Translate any word into your language.",
+
     postsTitle: "Posts",
     postsDesc: "All the articles I've posted.",
 
