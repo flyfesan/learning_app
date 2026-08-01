@@ -2,6 +2,7 @@ node_modules/
 .astro/
 dist/
 .pnpm-store/
+public/pagefind/
 
 .env
 .env.*
