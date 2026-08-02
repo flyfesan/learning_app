@@ -1,7 +1,8 @@
 {
   "name": "astro-devcontainer",
   "features": {
-    "ghcr.io/devcontainers/features/git:1": {}
+    "ghcr.io/devcontainers/features/git:1": {},
+    "ghcr.io/devcontainers/features/docker-in-docker": {}
   },
   "build": {
     "dockerfile": "Dockerfile",
@@ -12,17 +13,24 @@
       "extensions": [
         "dbaeumer.vscode-eslint",
         "ms-vscode.vscode-typescript-next",
-        "astro-build.astro-vscode"
+        "astro-build.astro-vscode",
+        "denoland.vscode-deno"
       ],
       "settings": {
         "js/ts.tsdk.path": "node_modules/typescript/lib",
-        "eslint.validate": ["javascript",  "typescript"],
+        "eslint.validate": [
+          "javascript",
+          "typescript"
+        ],
         "editor.codeActionsOnSave": {
           "source.fixAll.eslint": "explicit"
         }
       }
     }
   },
-  "forwardPorts": [4321],
-  "remoteUser": "node"
+  "forwardPorts": [
+    4321
+  ],
+  "remoteUser": "node",
+  "postCreateCommand": "deno install"
 }
