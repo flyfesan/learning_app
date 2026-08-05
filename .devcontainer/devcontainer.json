@@ -32,5 +32,5 @@
     4321
   ],
   "remoteUser": "node",
-  "postCreateCommand": "deno install"
+  "postCreateCommand": "deno install --entrypoint supabase/functions/translate"
 }

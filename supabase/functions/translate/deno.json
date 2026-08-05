@@ -1,8 +1,8 @@
 {
   "imports": {
-    "@huggingface/inference": "https://esm.sh/@huggingface/inference@2.8.1",
+    "@huggingface/inference": "npm:@huggingface/inference",
     "@supabase/functions-js": "jsr:@supabase/functions-js@^2",
     "@supabase/server": "npm:@supabase/server@^1",
-    "@zod/zod": "jsr:@zod/zod@^4.4.3"
+    "zod": "jsr:@zod/zod@^4.4.3"
   }
 }

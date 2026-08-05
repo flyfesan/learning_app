@@ -5,20 +5,11 @@
 // Setup type definitions for built-in Supabase Runtime APIs
 import "@supabase/functions-js/edge-runtime.d.ts";
 import { withSupabase } from "@supabase/server";
-import * as z from "@zod/zod";
-import { HfInference } from "@huggingface/inference";
+import { InferenceClient } from "@huggingface/inference";
+import { TranslateRequestSchema } from "../../../contracts/translate.ts";
 
 const hfToken = Deno.env.get("HF_TOKEN");
-const inference = new HfInference(hfToken);
-
-const RequestBodySchema = z.object({
-  text: z.string().min(1),
-  source: z.enum(["en", "es"]),
-  target: z.enum(["en", "es"]),
-}).refine(({ source, target }) => source !== target, {
-  message: "source and target must be different",
-  path: ["target"],
-});
+const inference = new InferenceClient(hfToken);
 
 const MODEL_BY_PAIR = {
   "en-es": "Helsinki-NLP/opus-mt-en-es",
@@ -33,19 +24,19 @@ type InferenceTranslationOutput = {
 
 const extractTranslatedText = (
   output: InferenceTranslationOutput | InferenceTranslationOutput[] | string,
-): string => {
+): string | null => {
   if (typeof output === "string") return output;
 
   if (Array.isArray(output)) {
     const first = output[0];
     return typeof first?.translation_text === "string"
       ? first.translation_text
-      : "";
+      : null;
   }
 
   return typeof output.translation_text === "string"
     ? output.translation_text
-    : "";
+    : null;
 };
 
 // This endpoint uses 'publishable' | 'secret' access, apiKey is required.
@@ -54,7 +45,7 @@ const extractTranslatedText = (
 export default {
   fetch: withSupabase({ auth: ["publishable", "secret"] }, async (req) => {
     if (!hfToken) {
-      return Response.json({ error: "Missing HF_TOKEN" }, { status: 500 });
+      return Response.json({ error: "Missing provider" }, { status: 500 });
     }
 
     // Called by another service with a secret key
@@ -70,14 +61,13 @@ export default {
     }
     */
 
-    const requestBody = RequestBodySchema.safeParse(await req.json());
+    const requestBody = TranslateRequestSchema.safeParse(await req.json());
     if (!requestBody.success) {
       return Response.json({ error: "Bad request" }, { status: 400 });
     }
 
     const { text, source, target } = requestBody.data;
     const pair = `${source}-${target}` as Pair;
-
     if (!(pair in MODEL_BY_PAIR)) {
       return Response.json({ error: "Unsupported language pair" }, {
         status: 400,
@@ -88,7 +78,6 @@ export default {
     const output = await inference.translation({
       model,
       inputs: text,
-      endpointUrl: `https://router.huggingface.co/hf-inference/models/${model}`,
     });
 
     const translatedText = extractTranslatedText(output);
