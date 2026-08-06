@@ -17,14 +17,14 @@ const config: ResolvedLingoMasterConfig = {
     lang: userConfig.site.lang ?? "en",
     timezone: userConfig.site.timezone ?? "UTC",
     dir: userConfig.site.dir ?? "ltr",
-    googleVerification:
-      userConfig.site.googleVerification || PUBLIC_GOOGLE_SITE_VERIFICATION,
+    googleVerification: userConfig.site.googleVerification ||
+      PUBLIC_GOOGLE_SITE_VERIFICATION,
   },
   posts: {
     perPage: userConfig.posts?.perPage ?? 4,
     perIndex: userConfig.posts?.perIndex ?? 4,
-    scheduledPostMargin:
-      userConfig.posts?.scheduledPostMargin ?? 15 * 60 * 1000,
+    scheduledPostMargin: userConfig.posts?.scheduledPostMargin ??
+      15 * 60 * 1000,
   },
   features: {
     lightAndDarkMode: userConfig.features?.lightAndDarkMode ?? true,
