@@ -10,9 +10,11 @@ import config from "./lingo-master.config.ts";
 
 export default defineConfig({
   site: config.site.url,
+
   adapter: node({
     mode: "standalone",
   }),
+
   i18n: {
     locales: ["en"],
     defaultLocale: "en",
@@ -20,9 +22,11 @@ export default defineConfig({
       prefixDefaultLocale: false,
     },
   },
+
   vite: {
     plugins: [tailwindcss()],
   },
+
   fonts: [
     {
       name: "Google Sans Code",
@@ -34,6 +38,7 @@ export default defineConfig({
       formats: ["woff", "ttf"],
     },
   ],
+
   env: {
     schema: {
       PUBLIC_GOOGLE_SITE_VERIFICATION: envField.string({
@@ -43,7 +48,9 @@ export default defineConfig({
       }),
     },
   },
+
   experimental: {
     svgOptimizer: svgoOptimizer(),
   },
+
 });
