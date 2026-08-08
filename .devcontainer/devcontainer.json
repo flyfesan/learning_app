@@ -1,8 +1,9 @@
 {
-  "name": "astro-devcontainer",
+  "name": "expo-devcontainer",
   "features": {
     "ghcr.io/devcontainers/features/git:1": {},
-    "ghcr.io/devcontainers/features/docker-in-docker": {}
+    "ghcr.io/devcontainers/features/docker-in-docker": {},
+    "ghcr.io/danzilberdan/devcontainers/opencode:0": {}
   },
   "build": {
     "dockerfile": "Dockerfile",
@@ -13,23 +14,34 @@
       "extensions": [
         "dbaeumer.vscode-eslint",
         "ms-vscode.vscode-typescript-next",
-        "astro-build.astro-vscode",
+        "expo.vscode-expo",
+        "bradlc.vscode-tailwindcss",
         "denoland.vscode-deno"
       ],
       "settings": {
         "js/ts.tsdk.path": "node_modules/typescript/lib",
         "eslint.validate": [
           "javascript",
-          "typescript"
+          "javascriptreact",
+          "typescript",
+          "typescriptreact"
         ],
         "editor.codeActionsOnSave": {
           "source.fixAll.eslint": "explicit"
+        },
+        "files.associations": {
+          "*.css": "tailwindcss"
         }
       }
     }
   },
   "forwardPorts": [
-    4321
+    8081,
+    54321,
+    54322,
+    54323,
+    54324,
+    54327
   ],
   "remoteUser": "node",
   "postCreateCommand": "deno install --entrypoint supabase/functions/translate"

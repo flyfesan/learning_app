@@ -1,24 +1,31 @@
 {
-  "extends": "astro/tsconfigs/strict",
-  "include": [
-    ".astro/types.d.ts",
-    "**/*"
-  ],
-  "exclude": [
-    "dist",
-    "public/pagefind"
-  ],
+  "extends": "expo/tsconfig.base",
   "compilerOptions": {
+    "strict": true,
     "paths": {
       "@/*": [
-        "src/*"
+        "./*"
       ],
       "@contracts/*": [
-        "contracts/*"
+        "./contracts/*"
       ]
     },
-    "baseUrl": ".",
-    "jsx": "react-jsx",
-    "jsxImportSource": "react"
-  }
+    "jsx": "react-native",
+    "types": [
+      "nativewind/types"
+    ]
+  },
+  "include": [
+    "**/*.ts",
+    "**/*.tsx",
+    ".expo/types/**/*.ts",
+    "expo-env.d.ts",
+    "nativewind-env.d.ts"
+  ],
+  "exclude": [
+    "node_modules",
+    "dist",
+    ".expo",
+    "supabase"
+  ]
 }
