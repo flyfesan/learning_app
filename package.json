@@ -14,10 +14,13 @@
     "web": "expo start --web",
     "lint": "eslint .",
     "typecheck": "tsc --noEmit",
-    "build": "expo export"
-    
+    "check": "pnpm lint && pnpm typecheck",
+    "build": "expo export",
+    "web:build": "./scripts/deploy.sh",
+    "deploy": "eas build --platform all && eas submit --platform all"
   },
   "dependencies": {
+    "@huggingface/inference": "^4.13.25",
     "@rn-primitives/portal": "1.5.2",
     "@rn-primitives/select": "1.5.2",
     "@rn-primitives/slot": "1.5.2",

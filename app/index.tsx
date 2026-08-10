@@ -32,19 +32,18 @@ export default function TranslateScreen() {
     if (!source || !target || !text.trim() || state.kind === 'loading') return;
 
     setState({ kind: 'loading' });
-    try {
-      const { result } = await translateText({
-        text: text.trim(),
-        source: source.value,
-        target: target.value,
-      });
-      setState({ kind: 'success', translation: result });
-    } catch (error) {
-      setState({
-        kind: 'error',
-        error: error instanceof Error ? error.message : 'Translation failed',
-      });
-    }
+    const  result  = await translateText({
+      text: text.trim(),
+      source: source.value,
+      target: target.value,
+    });
+
+    setState(
+      result.kind === 'success' 
+      ? { kind: 'success', translation: result.result } 
+      : { kind: 'error', error: result.error }
+    );
+    
   };
 
   return (
