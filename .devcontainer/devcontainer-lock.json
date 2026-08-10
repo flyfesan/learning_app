@@ -1,5 +1,10 @@
 {
   "features": {
+    "ghcr.io/danzilberdan/devcontainers/opencode:0": {
+      "version": "0.0.6",
+      "resolved": "ghcr.io/danzilberdan/devcontainers/opencode@sha256:e43ac479f99686e96b77dd27edfb5004b922bca3049dc2995c450177bda3bcb9",
+      "integrity": "sha256:e43ac479f99686e96b77dd27edfb5004b922bca3049dc2995c450177bda3bcb9"
+    },
     "ghcr.io/devcontainers/features/docker-in-docker": {
       "version": "4.0.0",
       "resolved": "ghcr.io/devcontainers/features/docker-in-docker@sha256:4fa87399214366e320d489991769c4f3f461e1ffe461f54eea78a41b34945bb5",
