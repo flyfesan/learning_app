@@ -15,7 +15,7 @@
         "dbaeumer.vscode-eslint",
         "ms-vscode.vscode-typescript-next",
         "expo.vscode-expo",
-        "bradlc.vscode-tailwindcss",
+        "bradlc.vscode-tailwindcss"
       ],
       "settings": {
         "js/ts.tsdk.path": "node_modules/typescript/lib",
@@ -42,6 +42,5 @@
     54324,
     54327
   ],
-  "remoteUser": "node",
-  "postCreateCommand": "deno install --entrypoint supabase/functions/translate"
+  "remoteUser": "node"
 }
