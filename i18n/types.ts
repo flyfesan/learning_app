@@ -4,19 +4,8 @@ export interface UIStrings {
     translate: string;
     about: string;
     search: string;
-  };
-  post: {
-    publishedAt: string;
-    updatedAt: string;
-    sharePostIntro: string;
-    sharePostOn: string;
-    sharePostViaEmail: string;
-    tagLabel: string;
-    backToTop: string;
-    goBack: string;
-    editPage: string;
-    previousPost: string;
-    nextPost: string;
+    signin: string;
+    signup: string;
   };
   pagination: {
     prev: string;
@@ -51,16 +40,9 @@ export interface UIStrings {
 
     searchTitle: string;
     searchDesc: string;
-  };
-  a11y: {
-    skipToContent: string;
-    openMenu: string;
-    closeMenu: string;
-    toggleTheme: string;
-    searchPlaceholder: string;
-    noResults: string;
-    goToPreviousPage: string;
-    goToNextPage: string;
+
+
+    signupTitle: string;
   };
   notFound: {
     title: string;
@@ -69,5 +51,28 @@ export interface UIStrings {
   };
   action: {
     translate: string;
+  };
+
+  auth: {
+    signinTitlePage: string;
+    signinDescPage: string;
+    signupTitlePage: string;
+    signupDescPage: string;
+    passwordResetTitlePage: string;
+    passwordResetDescPage: string;
+    action: {
+      login: string;
+      register: string;
+      googleSignin: string;
+      googleSignup: string;
+      appleSignin: string;
+      appleSignup: string;
+    };
+    passwordHint: string;
+    passwordReset: string;
+    passwordResetSuccess: string;
+    forgotPassword: string;
+    noAccount: string;
+    haveAccount: string;
   };
 }

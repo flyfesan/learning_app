@@ -1,4 +1,4 @@
-import { Text } from '@/components/ui/text';
+import { Label } from '@/components/ui/label';
 import { useTranslations } from '@/i18n';
 import { View } from 'react-native';
 
@@ -9,9 +9,9 @@ export function Footer() {
   return (
     <View className="px-4 pb-4 w-full">
       <View className="bg-background border-border mt-auto flex-col items-center justify-center rounded-2xl border px-4 py-4">
-        <Text className="text-sm text-muted-foreground">
+        <Label className="text-sm text-muted-foreground">
           {t.footer.copyright} &copy; {currentYear} | {t.footer.allRightsReserved}
-        </Text>
+        </Label>
       </View>
     </View>
   );

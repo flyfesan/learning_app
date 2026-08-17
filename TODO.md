@@ -4,6 +4,7 @@
 
 - [ ] Add CI workflow under `.github/workflows/` to run `pnpm install --frozen-lockfile`, `pnpm run lint`, `pnpm run typecheck`, and `pnpm run build` on every PR and push.
 - [ ] Add a deployment manifest (for example `eas.json` or `render.yaml`) so deploy settings are versioned and reproducible.
+- [ ] Download the model instead of using an inference method. I should work with small models for now as it's not scalable.
 
 ## Medium Priority
 
@@ -14,8 +15,6 @@
 ## Low Priority
 
 - [ ] Add runtime/tooling constraints in `package.json`:
-  - [ ] `packageManager` pin (pnpm version)
-  - [ ] `engines.node` and `engines.pnpm`
 
 ## Validation Checklist
 

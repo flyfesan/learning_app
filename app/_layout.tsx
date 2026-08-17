@@ -11,12 +11,38 @@ import { NAV_THEME } from '@/lib/theme';
 import { View } from 'react-native';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import AuthProvider from '@/services/auth/context';
+// import { useEffect } from 'react';
+// import { createSupabaseClient } from '@/lib/supabase';
 
 export { ErrorBoundary } from 'expo-router';
 
 export default function RootLayout() {
+  return (
+    <AuthProvider.AuthProvider>
+      <MainLayout />
+    </AuthProvider.AuthProvider>
+  );
+}
+
+function MainLayout() {
   const { colorScheme } = useColorScheme();
   const theme = NAV_THEME[colorScheme ?? 'light'];
+
+  // const { setAuth } = AuthProvider.useAuth();
+  // useEffect(() => {
+  //   createSupabaseClient().auth.onAuthStateChange((_, session) => {
+  //     if (session) {
+  //       setAuth(session.user);
+  //       router.replace('/(private)/profile');
+  //       return;
+  //     }
+
+  //     setAuth(null);
+  //     router.replace('/(public)/');
+  //   });
+
+  // }, [setAuth]);
 
   return (
     <ThemeProvider value={theme}>
@@ -29,8 +55,11 @@ export default function RootLayout() {
           <Header />
           <View className="flex-1 p-6 max-w-5xl">
             <Stack screenOptions={{ headerShown: false }}>
-              <Stack.Screen name="index" />
-              <Stack.Screen name="about" />
+              <Stack.Screen name="(private)/profile" />
+              <Stack.Screen name="(public)/about" />
+              <Stack.Screen name="(public)/(auth)/login" />
+              <Stack.Screen name="(public)/(auth)/register" />
+              <Stack.Screen name="(public)/translate" />
             </Stack>
           </View>
           <Footer />

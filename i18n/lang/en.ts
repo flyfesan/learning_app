@@ -6,19 +6,8 @@ export default {
     translate: 'Translate',
     about: 'About Us',
     search: 'Search',
-  },
-  post: {
-    publishedAt: 'Published at',
-    updatedAt: 'Updated',
-    sharePostIntro: 'Share this post:',
-    sharePostOn: 'Share this post on {{platform}}',
-    sharePostViaEmail: 'Share this post via email',
-    tagLabel: 'Tags',
-    backToTop: 'Back to top',
-    goBack: 'Go back',
-    editPage: 'Edit page',
-    previousPost: 'Previous Post',
-    nextPost: 'Next Post',
+    signin: 'Sign In',
+    signup: 'Sign Up',
   },
   pagination: {
     prev: 'Prev',
@@ -42,8 +31,8 @@ export default {
     tagsTitle: 'Tags',
     tagsDesc: 'All the tags used in posts.',
 
-    translateTitle: 'Translate',
-    translateDesc: 'Translate any word into your language.',
+    translateTitle: 'Translate anything',
+    translateDesc: 'Translate any text into your language.',
 
     postsTitle: 'Posts',
     postsDesc: "All the articles I've posted.",
@@ -53,16 +42,8 @@ export default {
 
     searchTitle: 'Search',
     searchDesc: 'Search any article ...',
-  },
-  a11y: {
-    skipToContent: 'Skip to content',
-    openMenu: 'Open menu',
-    closeMenu: 'Close menu',
-    toggleTheme: 'Toggle theme',
-    searchPlaceholder: 'Search posts...',
-    noResults: 'No results found',
-    goToPreviousPage: 'Go to previous page',
-    goToNextPage: 'Go to next page',
+
+    signupTitle: 'Sign Up',
   },
   notFound: {
     title: '404 Not Found',
@@ -71,5 +52,28 @@ export default {
   },
   action: {
     translate: 'Translate',
+
+  },
+  auth: {
+    signinTitlePage: 'Sign In',
+    signinDescPage: 'Login with your Apple or Google account',
+    signupTitlePage: 'Sign Up',
+    signupDescPage: 'Create your account to get started',
+    passwordResetTitlePage: 'Reset Password',
+    passwordResetDescPage: 'Enter your email to reset your password',
+    action: {
+      login: 'Login',
+      register: 'Register',
+      googleSignin: 'Login with Google',
+      appleSignin: 'Login with Apple',
+      googleSignup: 'Sign up with Google',
+      appleSignup: 'Sign up with Apple',
+    },
+    passwordHint: 'Must be at least 8 characters long.',
+    passwordReset: 'Reset Password',
+    passwordResetSuccess: 'Password reset successful',
+    forgotPassword: 'Forgot Password?',
+    noAccount: 'Don\'t have an account?',
+    haveAccount: 'Already have an account?',
   },
 } satisfies UIStrings;
