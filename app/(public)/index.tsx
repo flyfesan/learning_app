@@ -61,8 +61,8 @@ export default function TranslateScreen() {
   };
 
   return (
-    <View className="flex-1">
-      <View className="flex-1 gap-4 px-4 py-6">
+    <View>
+      <View className="gap-4 px-4 py-6">
         <View className="gap-1">
           <Label className="text-xl">{t.pages.translateTitle}</Label>
         </View>

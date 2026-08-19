@@ -68,6 +68,12 @@ export interface UIStrings {
       appleSignin: string;
       appleSignup: string;
     };
+    labels: {
+      passwordConfirm: string;
+      email: string;
+      password: string;
+    },
+    continueWith: string;
     passwordHint: string;
     passwordReset: string;
     passwordResetSuccess: string;

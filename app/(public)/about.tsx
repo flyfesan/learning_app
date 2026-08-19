@@ -6,8 +6,8 @@ export default function AboutScreen() {
   const t = useTranslations();
 
   return (
-    <View className="flex-1 w-full">
-      <View className="flex-1 gap-4 px-4 py-6 max-w-3xl">
+    <View className="w-full">
+      <View className="gap-4 px-4 py-6 max-w-3xl">
         <View className="gap-1">
           <Label className="text-lg">{t.nav.about}</Label>
           <Label className="text-muted">A bit about this app.</Label>

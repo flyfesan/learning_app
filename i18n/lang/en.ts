@@ -69,6 +69,12 @@ export default {
       googleSignup: 'Sign up with Google',
       appleSignup: 'Sign up with Apple',
     },
+    labels: {
+      email: 'Email',
+      password: 'Password',
+      passwordConfirm: 'Confirm Password',
+    },
+    continueWith: 'Or continue with',
     passwordHint: 'Must be at least 8 characters long.',
     passwordReset: 'Reset Password',
     passwordResetSuccess: 'Password reset successful',
