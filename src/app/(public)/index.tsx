@@ -10,7 +10,6 @@ export default function AboutScreen() {
       <View className="gap-4 px-4 py-6 max-w-3xl">
         <View className="gap-1">
           <Label className="text-lg">{t.nav.about}</Label>
-          <Label className="text-muted">A bit about this app.</Label>
         </View>
         <Label>{"Just a description of the project I'm building here"}</Label>
       </View>

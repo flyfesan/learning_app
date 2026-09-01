@@ -20,9 +20,8 @@ import { View } from "react-native"
 import { useForm, Controller } from "react-hook-form"
 import { z } from "zod"
 import { useState } from "react"
-import { AuthError, UserService } from "@/services/auth"
+import { AuthError, AuthService } from "@/services/auth"
 import { router } from "expo-router"
-import useAuth from "@/services/auth/context"
 
 const Password = z.string()
     .min(8, { message: "Password must be at least 8 characters" })
@@ -41,15 +40,14 @@ const RegisterFormSchema = z.object({
     confirmPassword: Password,
 }).refine((data) => data.password === data.confirmPassword, {
     message: "Passwords do not match",
-})
+});
 
 type RegisterForm = z.infer<typeof RegisterFormSchema>;
 
-const signUp = async (form: RegisterForm, setAuth: ) => {
-    const userService = new UserService();
+const signUp = async (form: RegisterForm) => {
+    const userService = new AuthService();
     try {
         const { user, session } = await userService.signUp(form);
-        setAuth({ user, session });
         console.log("User signed up:", user);
         console.log("Session:", session);
 
@@ -65,10 +63,12 @@ const signUp = async (form: RegisterForm, setAuth: ) => {
     }
 }
 
+type SignUpFormState = { kind: "error"; message: string } | { kind: "idle" };
+
 export function SignUpForm() {
     const t = useTranslations();
-    const { setAuth } = useAuth();
-    const [state, setState] = useState<{ kind: "error"; message: string } | null>(null);
+    const [state, setState] = useState<SignUpFormState>({ kind: "idle" });
+
     const {
         control,
         handleSubmit,
@@ -80,8 +80,8 @@ export function SignUpForm() {
             setState({ kind: "error", message: z.prettifyError(parsedForm.error) });
             return;
         }
-        setState(null);
-        signUp(parsedForm.data, setAuth);
+        setState({ kind: "idle" });
+        signUp(parsedForm.data);
     }
 
 

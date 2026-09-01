@@ -4,10 +4,7 @@
     "strict": true,
     "paths": {
       "@/*": [
-        "./*"
-      ],
-      "@contracts/*": [
-        "./contracts/*"
+        "./src/*"
       ]
     },
     "jsx": "react-native",
@@ -23,7 +20,7 @@
     "nativewind-env.d.ts"
   ],
   "exclude": [
-    "node_modules",
+    "src/node_modules",
     "dist",
     ".expo",
     "supabase"

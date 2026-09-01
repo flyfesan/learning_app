@@ -13,6 +13,9 @@ import { translateText } from '@/services/translate';
 import { useState } from 'react';
 import { View } from 'react-native';
 
+// Interesting State thought here. Translation state cannot be loading and have the source and target languages undefined.
+// Refactor needed here
+
 type TranslationState =
   | { kind: 'idle' }
   | { kind: 'loading' }

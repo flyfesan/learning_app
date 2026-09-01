@@ -42,5 +42,9 @@
     54324,
     54327
   ],
-  "remoteUser": "node"
+  "remoteUser": "node",
+  "runArgs": [
+    "--name",
+    "${localEnv:USER}_${localWorkspaceFolderBasename}"
+  ]
 }

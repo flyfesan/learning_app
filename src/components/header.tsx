@@ -3,9 +3,13 @@ import { config } from '@/lib/config';
 import { Link, usePathname } from 'expo-router';
 import { Pressable, View } from 'react-native';
 import { Label } from '@/components/ui/label';
-import { NavLink } from './navlink';
+import { NavLink } from '@/components/navlink';
 
-export function Header() {
+type HeaderProps = {
+  userLoggedIn: boolean;
+}
+
+export function Header({ userLoggedIn }: HeaderProps) {
   const pathname = usePathname();
   const t = useTranslations();
 
@@ -18,9 +22,17 @@ export function Header() {
           </Pressable>
         </Link>
         <View className="flex-row items-center gap-4">
-          <NavLink href="/" label={t.nav.translate} active={pathname === '/'} />
-          <NavLink href="/about" label={t.nav.about} active={pathname === '/about'} />
-          <NavLink href="/(public)/(auth)/login" label={t.nav.signin} active={pathname === '/login'} />
+          {userLoggedIn ?
+            <>
+              <NavLink href="/" label={t.nav.home} active={pathname === '/'} />
+              <NavLink href="/(public)/(auth)/login" label={t.nav.signin} active={pathname === '/login'} />
+            </>
+            :
+            <>
+              <NavLink href="/(private)/translate" label={t.nav.translate} active={pathname === '/translate'} />
+              <NavLink href="/(private)/profile" label={t.nav.signin} active={pathname === '/login'} />
+            </>
+          }
         </View>
       </View>
     </View>

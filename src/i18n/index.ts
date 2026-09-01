@@ -1,7 +1,7 @@
-import type { UIStrings } from './types';
-import en from './lang/en';
+import type { UIStrings } from '@/i18n/types';
+import en from '@/i18n/lang/en';
 
-export { tplStr } from './format';
+export { tplStr } from '@/i18n/format';
 
 const translations: Record<string, UIStrings> = {
   en,

@@ -95,7 +95,6 @@ export const LoginForm = ({
                                 <Button type="submit">Login</Button>
                                 <FieldDescription className="text-center">
                                     {t.auth.noAccount}
-                                    {' '}
                                     <Link href="/(public)/(auth)/register">
                                         {t.nav.signup}
                                     </Link>

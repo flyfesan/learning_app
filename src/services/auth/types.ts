@@ -1,4 +1,4 @@
-import type { User } from "@supabase/supabase-js";
+import type { AuthError, Session, User } from "@supabase/supabase-js";
 import { z } from "zod";
 
 export type CurrentUser = {
@@ -25,13 +25,13 @@ export const SignUpSchema = z.object({
     fullName: z.string().min(2, 'Full name must be at least 2 characters'),
 });
 
-export type SignUp = z.infer<typeof SignUpSchema>;
+export type SignUpForm = z.infer<typeof SignUpSchema>;
 
 export const SignInSchema = z.object({
     email: z.email(),
     password: z.string().min(1, 'Password is required'),
 });
-export type SignIn = z.infer<typeof SignInSchema>;
+export type SignInForm = z.infer<typeof SignInSchema>;
 
 export const ResetPasswordSchema = z.object({
     email: z.email(),
@@ -41,10 +41,19 @@ export type ResetPasswordEmail = z.infer<typeof ResetPasswordSchema>;
 export const UpdatePasswordSchema = z.object({
     password: PasswordSchema,
 });
-export type UpdatePassword = z.infer<typeof UpdatePasswordSchema>;
+export type UpdatePasswordForm = z.infer<typeof UpdatePasswordSchema>;
 
 export const UpdateProfileSchema = z.object({
     fullName: z.string().min(2, 'Full name must be at least 2 characters').optional(),
     avatarUrl: z.url().optional().nullable(),
 });
-export type UpdateProfile = z.infer<typeof UpdateProfileSchema>;
+export type UpdateProfileForm = z.infer<typeof UpdateProfileSchema>;
+
+export type AuthResult = {
+    kind: "success"
+    user?: User;
+    session?: Session;
+} | {
+    kind: "error"
+    error: AuthError | string;
+}

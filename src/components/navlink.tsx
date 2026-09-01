@@ -1,5 +1,5 @@
 import { Link } from "expo-router";
-import { Label } from "./ui/label";
+import { Label } from "@/components/ui/label";
 import { Pressable } from "react-native";
 
 function cnNav(...classes: (string | false | undefined)[]) {
@@ -8,10 +8,11 @@ function cnNav(...classes: (string | false | undefined)[]) {
 
 type ROUTES = [
     '/',
-    '/about',
+    '/translate',
     '/(public)/(auth)/login',
     '/(public)/(auth)/register',
     '/(private)/profile',
+    '/(private)/translate'
 ];
 
 export type Href = ROUTES[number];
