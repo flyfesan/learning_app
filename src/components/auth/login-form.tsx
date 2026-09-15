@@ -18,6 +18,12 @@ import { Input } from "@/components/ui/input"
 import { useTranslations } from "@/i18n"
 import { AppleIcon, GoogleIcon } from "@/components/icons"
 import { Text, View } from "react-native"
+import type { FormState, LogInForm } from "./types";
+import { LogInFormSchema } from "./types";
+import { useForm } from "react-hook-form"
+import z from "zod"
+import { useState } from "react"
+import { useSession } from "@/services/auth/context"
 
 type SsoButtonProps = {
     label: string;
@@ -31,14 +37,31 @@ const SsoButton = ({ label, icon, onClick }: SsoButtonProps) => (
     </Button>
 )
 
-type LoginFormProps = {
+type LogInFormProps = {
     ssoFeature: boolean;
 };
 
 export const LoginForm = ({
     ssoFeature,
-}: LoginFormProps) => {
+}: LogInFormProps) => {
     const t = useTranslations();
+    const { logUserIn } = useSession();
+    // const [state, setState] = useState<FormState>();
+
+    // const {
+    //     control,
+    //     handleSubmit,
+    //     formState: { errors },
+    // } = useForm<LogInForm>()
+    // const onSubmit = (data: LogInForm) => {
+    //     const parsedForm = LogInFormSchema.safeParse(data);
+    //     if (!parsedForm.success) {
+    //         setState({ kind: "error", message: z.prettifyError(parsedForm.error) });
+    //         return;
+    //     }
+    //     setState({ kind: "idle" });
+    //     ({ logIn: logUserIn, registerForm: parsedForm.data });
+    // }
 
     return (
         <View className="max-w-lg gap-6">
