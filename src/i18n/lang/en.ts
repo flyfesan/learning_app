@@ -1,4 +1,4 @@
-import type { UIStrings } from '.@/types';
+import type { UIStrings } from '@/i18n/types';
 
 export default {
   nav: {
@@ -64,6 +64,7 @@ export default {
     action: {
       login: 'Login',
       register: 'Register',
+      logout: 'Logout',
       googleSignin: 'Login with Google',
       appleSignin: 'Login with Apple',
       googleSignup: 'Sign up with Google',

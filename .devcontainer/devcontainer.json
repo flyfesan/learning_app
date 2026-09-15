@@ -2,8 +2,7 @@
   "name": "expo-devcontainer",
   "features": {
     "ghcr.io/devcontainers/features/git:1": {},
-    "ghcr.io/devcontainers/features/docker-in-docker": {},
-    "ghcr.io/danzilberdan/devcontainers/opencode:0": {}
+    "ghcr.io/devcontainers/features/docker-in-docker": {}
   },
   "build": {
     "dockerfile": "Dockerfile",

@@ -20,8 +20,10 @@ import { View } from "react-native"
 import { useForm, Controller } from "react-hook-form"
 import { z } from "zod"
 import { useState } from "react"
-import { AuthError, AuthService } from "@/services/auth"
-import { router } from "expo-router"
+import { AuthService } from "@/services/auth"
+// import { router } from "expo-router"
+import { useSession } from "@/services/auth/context"
+import type { Session } from "@supabase/supabase-js"
 
 const Password = z.string()
     .min(8, { message: "Password must be at least 8 characters" })
@@ -42,20 +44,31 @@ const RegisterFormSchema = z.object({
     message: "Passwords do not match",
 });
 
-type RegisterForm = z.infer<typeof RegisterFormSchema>;
+type RegisterFormInfo = z.infer<typeof RegisterFormSchema>;
 
-const signUp = async (form: RegisterForm) => {
-    const userService = new AuthService();
+type SignUpProps = {
+    logIn: (session: Session) => void;
+    registerForm: RegisterFormInfo;
+}
+const signUp = async ({ registerForm, logIn }: SignUpProps) => {
     try {
-        const { user, session } = await userService.signUp(form);
-        console.log("User signed up:", user);
-        console.log("Session:", session);
+        const auth = new AuthService();
+        const res = await auth.signUp(registerForm);
 
-        router.navigate('(private)/profile');
+        if (res.kind === "success") {
+            console.log("User signed up:", res.user);
+            console.log("Session:", res.session);
+
+            if (typeof res.user === 'undefined' || typeof res.session === 'undefined') {
+                throw new Error(`error retrieving the newly signed up user. User=${res.user}; Session=${res.session}`);
+            }
+
+            logIn(res.session);
+        }
+
+        // router.navigate('(private)/profile');
     } catch (error) {
-        if (error instanceof AuthError) {
-            throw error;
-        } else if (error instanceof Error) {
+        if (error instanceof Error) {
             console.error("SignUp: error occurred", error.message);
         } else {
             console.error("SignUp: unknown error occurred", error);
@@ -65,23 +78,24 @@ const signUp = async (form: RegisterForm) => {
 
 type SignUpFormState = { kind: "error"; message: string } | { kind: "idle" };
 
-export function SignUpForm() {
+export const RegisterForm = () => {
     const t = useTranslations();
     const [state, setState] = useState<SignUpFormState>({ kind: "idle" });
+    const { logUserIn } = useSession();
 
     const {
         control,
         handleSubmit,
         formState: { errors },
-    } = useForm<RegisterForm>()
-    const onSubmit = (data: RegisterForm) => {
+    } = useForm<RegisterFormInfo>()
+    const onSubmit = (data: RegisterFormInfo) => {
         const parsedForm = RegisterFormSchema.safeParse(data);
         if (!parsedForm.success) {
             setState({ kind: "error", message: z.prettifyError(parsedForm.error) });
             return;
         }
         setState({ kind: "idle" });
-        signUp(parsedForm.data);
+        signUp({ logIn: logUserIn, registerForm: parsedForm.data });
     }
 
 

@@ -36,7 +36,7 @@ export type SignInForm = z.infer<typeof SignInSchema>;
 export const ResetPasswordSchema = z.object({
     email: z.email(),
 });
-export type ResetPasswordEmail = z.infer<typeof ResetPasswordSchema>;
+export type ResetPasswordForm = z.infer<typeof ResetPasswordSchema>;
 
 export const UpdatePasswordSchema = z.object({
     password: PasswordSchema,

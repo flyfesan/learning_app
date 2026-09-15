@@ -63,6 +63,7 @@ export interface UIStrings {
     action: {
       login: string;
       register: string;
+      logout: string;
       googleSignin: string;
       googleSignup: string;
       appleSignin: string;

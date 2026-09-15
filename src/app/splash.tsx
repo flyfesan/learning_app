@@ -3,7 +3,7 @@ import { useSession } from '@/services/auth/context';
 
 SplashScreen.preventAutoHideAsync();
 
-export function SplashScreenController() {
+const SplashScreenController = () => {
     const { isLoading } = useSession();
 
     if (!isLoading) {
@@ -12,3 +12,5 @@ export function SplashScreenController() {
 
     return null;
 }
+
+export default SplashScreenController;

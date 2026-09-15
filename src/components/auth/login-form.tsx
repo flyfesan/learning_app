@@ -37,9 +37,9 @@ type LoginFormProps = {
 
 export const LoginForm = ({
     ssoFeature,
-
 }: LoginFormProps) => {
     const t = useTranslations();
+
     return (
         <View className="max-w-lg gap-6">
             <Card>

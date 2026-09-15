@@ -11,7 +11,7 @@ import { ScrollView, View } from 'react-native';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { SessionProvider, useSession } from '@/services/auth/context';
-import { SplashScreenController } from '@/app/splash';
+import SplashScreenController from '@/app/splash';
 
 export { ErrorBoundary } from 'expo-router';
 
@@ -46,11 +46,11 @@ const MainLayout = () => {
             <View className="h-full p-6 w-full">
               <Stack screenOptions={{ headerShown: false }} >
                 <Stack.Protected guard={!!session}>
-                  <Stack.Screen name={"(private)"} />
+                  <Stack.Screen name="(private)" />
                 </Stack.Protected>
 
                 <Stack.Protected guard={!session}>
-                  <Stack.Screen name="public" />
+                  <Stack.Screen name="(public)" />
                 </Stack.Protected>
 
               </Stack>

@@ -1,9 +1,7 @@
 import type { SupabaseClient } from '@/lib/supabase';
 import { createSupabaseClient } from '@/lib/supabase'
-import type { CurrentUser, ResetPasswordForm, SignInForm, SignInResult, SignUpForm, SignUpResult, AuthResult, UpdatePasswordForm, UpdateProfileForm } from '@/services/auth/types';
+import type { SignInForm, SignUpForm, AuthResult, UpdatePasswordForm, UpdateProfileForm, ResetPasswordForm } from '@/services/auth/types';
 import { ResetPasswordSchema, SignInSchema, SignUpSchema, UpdatePasswordSchema, UpdateProfileSchema } from '@/services/auth/types';
-import type { AuthError, Session, User } from '@supabase/supabase-js';
-
 
 
 interface IUserService {
@@ -95,71 +93,85 @@ export class AuthService implements IUserService {
             kind: "success"
         }
     }
-}
 
-    public resetPassword = async (form: ResetPasswordForm) => {
-    const parsedData = ResetPasswordSchema.parse(form);
-    const { email } = parsedData;
 
-    const { error: resetPasswordError } = await this.supabase.auth.resetPasswordForEmail(email);
+    public resetPassword = async (form: ResetPasswordForm): Promise<AuthResult> => {
+        const { email } = ResetPasswordSchema.parse(form);
+        const { error: resetPasswordError } = await this.supabase.auth.resetPasswordForEmail(email);
 
-    if (resetPasswordError) {
-        throw new AuthError('ResetPassword', resetPasswordError.message);
-    }
-}
+        if (resetPasswordError) {
+            return {
+                kind: "error",
+                error: resetPasswordError,
+            }
+        }
 
-    public updatePassword = async (form: UpdatePasswordForm) => {
-    const parsedData = UpdatePasswordSchema.parse(form);
-    const { password } = parsedData;
-
-    const { data: updatePasswordResponse, error: updatePasswordError } = await this.supabase.auth.updateUser({
-        password,
-    });
-
-    if (updatePasswordError) {
-        throw new AuthError('UpdatePassword', updatePasswordError.message);
+        return {
+            kind: "success",
+        }
     }
 
-    return updatePasswordResponse.user;
-}
+    public updatePassword = async (form: UpdatePasswordForm): Promise<AuthResult> => {
+        const parsedData = UpdatePasswordSchema.parse(form);
+        const { password } = parsedData;
 
-    public updateProfile = async (form: UpdateProfileForm) => {
-    const parsedData = UpdateProfileSchema.parse(form);
-    const { fullName, avatarUrl } = parsedData;
+        const { error: updatePasswordError } = await this.supabase.auth.updateUser({
+            password,
+        });
 
-    const { data: updateProfileResponse, error: updateProfileError } = await this.supabase.auth.updateUser({
-        data: {
-            full_name: fullName,
-            avatar_url: avatarUrl,
-        },
-    });
+        if (updatePasswordError) {
+            return {
+                kind: "error",
+                error: updatePasswordError
+            }
+        }
 
-    if (updateProfileError) {
-        throw new AuthError('UpdateProfile', updateProfileError.message);
+        return {
+            kind: "success",
+        }
     }
 
-    return updateProfileResponse.user;
-}
+    public updateProfile = async (form: UpdateProfileForm): Promise<AuthResult> => {
+        const parsedData = UpdateProfileSchema.parse(form);
+        const { fullName, avatarUrl } = parsedData;
 
-    public getUser = async () => {
-    const { data: { user }, error } = await this.supabase.auth.getUser();
+        const { data: updateProfileResponse, error: updateProfileError } = await this.supabase.auth.updateUser({
+            data: {
+                full_name: fullName,
+                avatar_url: avatarUrl,
+            },
+        });
 
-    if (error) {
-        throw new AuthError('GetUser', error.message);
+        if (updateProfileError) {
+            return {
+                kind: "error",
+                error: updateProfileError
+            }
+        }
+
+        return { kind: "success", user: updateProfileResponse.user };
     }
 
-    if (!user) {
-        return null;
-    }
+    public getUser = async (): Promise<AuthResult> => {
+        const { data: { user }, error: getUserError } = await this.supabase.auth.getUser();
 
-    const currentUser: CurrentUser = {
-        ...user,
-        metadata: {
-            email: user.email ?? '',
-            fullName: user.user_metadata.full_name ?? '',
-            avatarUrl: user.user_metadata.avatar_url ?? null,
-        },
-    };
-    return currentUser;
-}
+        if (getUserError) {
+            return {
+                kind: "error",
+                error: getUserError,
+            }
+        }
+
+        if (!user) {
+            return {
+                kind: "error",
+                error: "couldn't find user"
+            };
+        }
+
+        return {
+            kind: "success",
+            user
+        };
+    }
 }
